@@ -18,9 +18,6 @@ num_rows = data.count("\n") + 1
 # count the number of columns in the data
 num_cols = data.find("\n")
 
-# remove superfluous new line characters from string
-data = data.replace("\n", "")
-
 curr_index = 0
 curr_x = 0
 curr_y = 0
@@ -37,7 +34,7 @@ while 1:
         curr_x -= num_cols
 
     # translate coordinates into an index in the string
-    curr_index = curr_x+(curr_y*num_cols)
+    curr_index = curr_x+(curr_y*(num_cols+1)) # compensate for new line characters by adding 1 to num_cols 
 
     if curr_index > len(data)-1:
         break
@@ -55,14 +52,5 @@ while 1:
 print(num_trees_hit)
 
 # write the data back out to the output file for visualization purposes
-# put the newlines back in
-curr_index = num_cols
-while 1:
-    data = data[:curr_index] + "\n" + data[curr_index:]
-    curr_index += num_cols+1
-    if curr_index > len(data):
-        break
-
-# write to file
 output_file.write(data)
 output_file.close()

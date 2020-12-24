@@ -13,9 +13,6 @@ num_rows = data.count("\n") + 1
 # count the number of columns in the data
 num_cols = data.find("\n")
 
-# remove superfluous new line characters from string
-data = data.replace("\n", "")
-
 def find_tree_hits(data, slope_x, slope_y):
     curr_index = 0
     curr_x = 0
@@ -33,7 +30,7 @@ def find_tree_hits(data, slope_x, slope_y):
             curr_x -= num_cols
 
         # translate coordinates into an index in the string
-        curr_index = curr_x+(curr_y*num_cols)
+        curr_index = curr_x+(curr_y*(num_cols+1)) # compensate for new line characters by adding 1 to num_cols 
 
         if curr_index > len(data)-1:
             break
